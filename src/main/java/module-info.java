@@ -13,7 +13,6 @@ module nl.gertjanidema.netex.chb_dataload {
     requires nl.gertjanidema.netex.core;
     requires chbhaltebestand;
     requires passengerstopassignment;
-    requires org.locationtech.jts;
     requires org.slf4j;
     requires spring.boot;
     requires spring.boot.autoconfigure;
@@ -25,5 +24,4 @@ module nl.gertjanidema.netex.chb_dataload {
     opens nl.gertjanidema.netex.chb_dataload.jobs to spring.core, spring.beans, spring.context;
     opens nl.gertjanidema.netex.chb_dataload.ndov to spring.core, spring.beans, spring.context;
     opens nl.gertjanidema.netex.chb_dataload.dto;
-//    exports nl.gertjanidema.netex.chb_dataload.ndov to spring.core, spring.beans;
 }
