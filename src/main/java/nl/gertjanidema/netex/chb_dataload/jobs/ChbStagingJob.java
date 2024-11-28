@@ -43,8 +43,8 @@ SELECT bearing,
     stop_place_long_name,
     stop_place_name, street,
     town,
-    ST_SETSRID(ST_POINT(x_coordinate, y_coordinate), 28992) AS rd_location,
     ST_TRANSFORM(ST_SETSRID(ST_POINT(x_coordinate, y_coordinate), 28992), 4326) AS wsg_location,
+    ST_SETSRID(ST_POINT(x_coordinate, y_coordinate), 28992) AS rd_location,
     quay_name,
     stop_side_code,
     transport_modes
@@ -90,7 +90,19 @@ SELECT user_stop_owner_code,
     FROM chb.dl_chb_psa
     );
 """;
-    
+
+    private static String update_chb_stop_area = """
+TRUNCATE TABLE chb.chb_stop_area;
+INSERT INTO chb.chb_stop_area (
+    SELECT sp.id AS stop_place_id, sp.stop_place_code AS area_code, sp.public_name AS name,
+        ST_Centroid(ST_Collect(q.wgs_location)) AS wgs_centriod, ST_Centroid(ST_Collect(rd_location)) AS rd_centroid,
+        count(*) AS stop_count
+    FROM chb.chb_quay q
+    JOIN chb.chb_stop_place sp ON q.stop_place_id = sp.id
+    GROUP BY sp.id, sp.stop_place_code, sp.public_name
+);
+""";
+
     private final EntityManagerFactory entityManagerFactory;
 
     @Inject
@@ -115,6 +127,7 @@ SELECT user_stop_owner_code,
             .start(sqlUpdateStep("Update quays", update_chb_quay))
             .next(sqlUpdateStep("Update stop places", update_chb_stop_place))
             .next(sqlUpdateStep("Update passenger stop assignments", update_chb_psa))
+            .next(sqlUpdateStep("Update stop areas", update_chb_stop_area))
             .build();
     }
 
