@@ -55,6 +55,12 @@ public class ChbDataload implements CommandLineRunner, ApplicationContextAware {
             jobLauncher.run(job, parameters);
             job = jobRegistry.getJob("chbPsaImportJob");
             jobLauncher.run(job, parameters);
+            job = jobRegistry.getJob("chbSupQuayImportJob");
+            jobLauncher.run(job, parameters);
+            job = jobRegistry.getJob("chbSupStopPlaceImportJob");
+            jobLauncher.run(job, parameters);
+            job = jobRegistry.getJob("chbSupPsaImportJob");
+            jobLauncher.run(job, parameters);
             job = jobRegistry.getJob("chbStagingJob");
             jobLauncher.run(job, parameters);
             

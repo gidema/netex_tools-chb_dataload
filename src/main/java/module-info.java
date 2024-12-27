@@ -1,4 +1,5 @@
 module nl.gertjanidema.netex.chb_dataload {
+    requires java.desktop;
     requires spring.batch.core;
     requires spring.context;
     requires spring.beans;

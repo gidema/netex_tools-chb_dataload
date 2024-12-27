@@ -22,7 +22,7 @@ public class QuayMapper implements ParentChildMapper<Quay, DlChbQuay, Stopplace>
             data.getTransportmode()).collect(Collectors.toList()));
         chbQuay.setMutationdate(quay.getMutationdate());
         chbQuay.setOnlygetout(quay.isOnlygetout());
-        chbQuay.setQuaycode(quay.getQuaycode());
+        chbQuay.setQuayCode(quay.getQuaycode());
         chbQuay.setValidfrom(quay.getValidfrom());
         chbQuay.setQuayType(quay.getQuaytypedata().getQuaytype());
         chbQuay.setQuayStatus(quay.getQuaystatusdata().getQuaystatus());

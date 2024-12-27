@@ -27,10 +27,10 @@ import nl.gertjanidema.netex.core.batch.GzipFileSystemResource;
 
 @Configuration
 @EnableBatchProcessing
-public class ChbStopplaceDataloadJob extends AbstractChbDataloadJob {
+public class ChbStopPlaceDataloadJob extends AbstractChbDataloadJob {
 
-    public ChbStopplaceDataloadJob() {
-        super("chb.dl_chb_psa");
+    public ChbStopPlaceDataloadJob() {
+        super("chb.dl_chb_stop_place");
     }
 
     @Value("${osm_netex.path.temp}")

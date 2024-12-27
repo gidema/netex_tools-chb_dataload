@@ -30,7 +30,7 @@ import nl.gertjanidema.netex.core.batch.GzipFileSystemResource;
 public class ChbPsaDataloadJob extends AbstractChbDataloadJob {
 
     public ChbPsaDataloadJob() {
-        super("chb.dl_chb_stop_place");
+        super("chb.dl_chb_psa");
     }
 
     @Value("${osm_netex.path.temp}")

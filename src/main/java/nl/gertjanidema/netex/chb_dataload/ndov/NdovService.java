@@ -16,6 +16,7 @@ import org.apache.commons.net.PrintCommandListener;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
+import org.apache.commons.net.ftp.FTPSClient;
 import org.springframework.beans.factory.annotation.Value;
 
 //import nl.gertjanidema.netex.dataload.dto.NetexFileInfo;
@@ -24,12 +25,23 @@ public class NdovService {
 
 //    private static Logger LOG = LoggerFactory.getLogger(NdovService.class);
 
-    private static String CHB_PREFIX = "ExportCHB";
-    private static String PSA_PREFIX = "PassengerStopAssignmentExportCHB";
+    private final static String CHB_PREFIX = "ExportCHB";
+    private final static String PSA_PREFIX = "PassengerStopAssignmentExportCHB";
+//    private final static String username = "anonymous";
+//    private final static String password = "anonymous@ndovloket.nl";
+
+    @Value("${ndov.server.ftp}")
+    private String FTP_SERVER;
+
+    @Value("${ndov.server.usesftp}")
+    private boolean useSftp = true;
     
-    @Value("${ndov.server.ftp:data.ndovloket.nl}")
-    public String FTP_SERVER;
-    
+    @Value("${ndov.username}")
+    private String username;
+
+    @Value("${ndov.password}")
+    private String password;
+
     @Value("${osm_netex.path.temp}")
     private Path tempPath;
 
@@ -60,11 +72,17 @@ public class NdovService {
     }
 
     public FTPClient connect() throws IOException {
-        var ftpClient = new FTPClient();
-        ftpClient.connect(InetAddress.getByName(FTP_SERVER));
-        ftpClient.login("anonymous", "anonymous@ndovloket.nl");
-        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+        FTPClient ftpClient;
+        if (useSftp) {
+            ftpClient = new FTPSClient();
+        }
+        else {
+            ftpClient = new FTPClient();
+        }
         ftpClient.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(System.out)));
+        ftpClient.connect(InetAddress.getByName(FTP_SERVER));
+        ftpClient.login(username, password);
+        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
         return ftpClient;
     }
 

@@ -8,7 +8,10 @@ import org.springframework.context.annotation.Configuration;
 
 import nl.gertjanidema.netex.chb_dataload.jobs.ChbPsaDataloadJob;
 import nl.gertjanidema.netex.chb_dataload.jobs.ChbQuayDataloadJob;
-import nl.gertjanidema.netex.chb_dataload.jobs.ChbStopplaceDataloadJob;
+import nl.gertjanidema.netex.chb_dataload.jobs.ChbStopPlaceDataloadJob;
+import nl.gertjanidema.netex.chb_dataload.jobs.ChbSupPsaDataloadJob;
+import nl.gertjanidema.netex.chb_dataload.jobs.ChbSupQuayDataloadJob;
+import nl.gertjanidema.netex.chb_dataload.jobs.ChbSupStopPlaceDataloadJob;
 import nl.gertjanidema.netex.chb_dataload.jobs.LoadChbFilesJob;
 import nl.gertjanidema.netex.chb_dataload.jobs.ChbStagingJob;
 
@@ -26,13 +29,28 @@ public class ChbBatchConfig {
     }
 
     @Bean
+    static ApplicationContextFactory importChbSupQuayConfig() {
+        return new GenericApplicationContextFactory(ChbSupQuayDataloadJob.class);
+    }
+    
+    @Bean
     static ApplicationContextFactory importChbStopPlaceConfig() {
-        return new GenericApplicationContextFactory(ChbStopplaceDataloadJob.class);
+        return new GenericApplicationContextFactory(ChbStopPlaceDataloadJob.class);
+    }
+    
+    @Bean
+    static ApplicationContextFactory importChbSupStopPlaceConfig() {
+        return new GenericApplicationContextFactory(ChbSupStopPlaceDataloadJob.class);
     }
 
     @Bean
     static ApplicationContextFactory importChbPsaConfig() {
         return new GenericApplicationContextFactory(ChbPsaDataloadJob.class);
+    }
+    
+    @Bean
+    static ApplicationContextFactory importChbSupPsaConfig() {
+        return new GenericApplicationContextFactory(ChbSupPsaDataloadJob.class);
     }
     
     @Bean
