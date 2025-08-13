@@ -2,14 +2,14 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>chb_dataload</artifactId>
     <properties>
-        <maven.compiler.release>21</maven.compiler.release>
+        <maven.compiler.release>17</maven.compiler.release>
         <commons-net.version>3.11.1</commons-net.version>
         <jakarta.inject.version>2.0.1</jakarta.inject.version>
     </properties>
     <parent>
         <groupId>nl.gertjanidema.netex_tools</groupId>
         <artifactId>netex_tools</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
     <dependencies>
         <dependency>
@@ -19,7 +19,7 @@
         <dependency>
             <groupId>nl.gertjanidema.netex_tools</groupId>
             <artifactId>core</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>nl.gertjanidema.nlgeo</groupId>
@@ -94,7 +94,7 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <release>21</release>
+                    <release>17</release>
                     <parameters>true</parameters>
                 </configuration>
             </plugin>
